@@ -78,60 +78,6 @@ def load_vrp_instance(filepath: str):
         return _parse_simple_format(filepath, lines)
 
 
-def load_instances_from_folder(folder_path: str, extensions=None):
-    """
-    Load all VRP instances from a folder
-    
-    Args:
-        folder_path: Path to folder containing instance files
-        extensions: List of file extensions to load (default: ['.txt', '.vrp'])
-    
-    Returns:
-        List of VRPInstance objects
-    """
-    if extensions is None:
-        extensions = ['.txt', '.vrp', '.dat']
-    
-    if not os.path.exists(folder_path):
-        raise FileNotFoundError(f"Folder not found: {folder_path}")
-    
-    if not os.path.isdir(folder_path):
-        raise ValueError(f"Path is not a folder: {folder_path}")
-    
-    instances = []
-    files_found = []
-    
-    # Get all files with matching extensions
-    for filename in sorted(os.listdir(folder_path)):
-        filepath = os.path.join(folder_path, filename)
-        
-        # Skip directories
-        if os.path.isdir(filepath):
-            continue
-        
-        # Check extension
-        _, ext = os.path.splitext(filename)
-        if ext.lower() not in extensions:
-            continue
-        
-        files_found.append(filename)
-        
-        try:
-            instance = load_vrp_instance(filepath)
-            instances.append(instance)
-            print(f"✓ Loaded: {filename} ({instance.num_customers} customers)")
-        except Exception as e:
-            print(f"✗ Failed to load {filename}: {str(e)}")
-    
-    if not files_found:
-        print(f"⚠️  No instance files found in {folder_path}")
-        print(f"   Looking for extensions: {extensions}")
-    
-    print(f"\nTotal loaded: {len(instances)}/{len(files_found)} instances")
-    
-    return instances
-
-
 def _parse_solomon_format(filepath: str, lines: list):
     """
     Parse Solomon VRPTW benchmark format
