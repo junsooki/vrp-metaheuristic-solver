@@ -52,7 +52,4 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 - Email: junsooki@usc.edu
 - Discussions: [GitHub Discussions](https://github.com/yourusername/vrp-metaheuristic-solver/discussions)
 
-**Status**: Under active development | **Version**: 0.1.0-alpha
-```
-
 
